@@ -3,15 +3,15 @@
 
  Source Server         : MySQL - Local
  Source Server Type    : MySQL
- Source Server Version : 100414
+ Source Server Version : 80035 (8.0.35)
  Source Host           : localhost:3306
  Source Schema         : gaboot
 
  Target Server Type    : MySQL
- Target Server Version : 100414
+ Target Server Version : 80035 (8.0.35)
  File Encoding         : 65001
 
- Date: 19/11/2023 17:44:21
+ Date: 21/11/2023 16:36:24
 */
 
 SET NAMES utf8mb4;
@@ -27,10 +27,10 @@ CREATE TABLE `carts`  (
   `productId` int UNSIGNED NOT NULL,
   `price` double UNSIGNED NOT NULL,
   `quantity` int UNSIGNED NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of carts
@@ -46,10 +46,10 @@ CREATE TABLE `categories`  (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `imgPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `imgThumbPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
@@ -74,10 +74,10 @@ CREATE TABLE `master_customers`  (
   `isActive` tinyint(1) NOT NULL DEFAULT 1,
   `imgPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `imgThumbPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_customers
@@ -95,15 +95,16 @@ CREATE TABLE `master_menus`  (
   `frontendurl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `menuHaveChild` tinyint(1) NOT NULL DEFAULT 0,
   `menuIsActive` tinyint(1) NOT NULL DEFAULT 0,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_menus
 -- ----------------------------
 INSERT INTO `master_menus` VALUES (1, 'User', 'fas fa-user', NULL, NULL, 1, 1, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
+INSERT INTO `master_menus` VALUES (2, 'Product', 'fas fa-cubes', NULL, NULL, 1, 1, '2023-11-21 07:23:26', '2023-11-21 07:36:58');
 
 -- ----------------------------
 -- Table structure for master_products
@@ -119,10 +120,10 @@ CREATE TABLE `master_products`  (
   `weight` double UNSIGNED NOT NULL,
   `weightUnit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `categoryId` int NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_products
@@ -135,16 +136,17 @@ DROP TABLE IF EXISTS `master_roles`;
 CREATE TABLE `master_roles`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `roleName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_roles
 -- ----------------------------
 INSERT INTO `master_roles` VALUES (1, 'Admin', '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `master_roles` VALUES (2, 'Sub Admin', '2023-11-03 17:40:18', '2023-11-15 14:40:20');
+INSERT INTO `master_roles` VALUES (3, 'Tezt', '2023-11-21 07:24:45', '2023-11-21 09:32:57');
 
 -- ----------------------------
 -- Table structure for master_submenus
@@ -158,10 +160,10 @@ CREATE TABLE `master_submenus`  (
   `backendUrl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `frontendurl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `submenuIsActive` tinyint(1) NOT NULL DEFAULT 1,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_submenus
@@ -169,6 +171,8 @@ CREATE TABLE `master_submenus`  (
 INSERT INTO `master_submenus` VALUES (1, 1, 'User', 'fas fa-user', '/user', '/user', 1, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `master_submenus` VALUES (2, 1, 'Role', 'fas fa-user-gear', '/role', '/role', 1, '2023-11-04 00:35:44', '2023-11-04 00:40:01');
 INSERT INTO `master_submenus` VALUES (3, 1, 'Menu', 'fas fa-minus', '/menu', '/menu', 1, '2023-11-04 00:35:44', '2023-11-04 00:40:02');
+INSERT INTO `master_submenus` VALUES (4, 2, 'Category', 'fas fa-cubes', '/categories', '/categories', 1, '2023-11-21 07:23:53', '2023-11-21 07:36:50');
+INSERT INTO `master_submenus` VALUES (5, 2, 'Product', 'fas fa-cube', '/products', '/products', 1, '2023-11-21 09:32:46', '2023-11-21 09:32:46');
 
 -- ----------------------------
 -- Table structure for master_users
@@ -186,16 +190,16 @@ CREATE TABLE `master_users`  (
   `imgPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `imgThumbPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `roleId` int UNSIGNED NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_users
 -- ----------------------------
 INSERT INTO `master_users` VALUES (1, 'admin', 'admin@example.com', 'admin', 'admin', '$2b$10$VinhbaHFCPGyLXfxKKhtKOoAolmnvpzvOsxgYV2zGV4SPn4pkbvBO', NULL, 1, 'storage/user/pictures/admin.png', 'storage/user/pictures/thumb/admin_thumb.png', 1, '2023-11-03 17:35:49', '2023-11-03 17:36:09');
-INSERT INTO `master_users` VALUES (2, 'mand', 'mand@mail.com', 'mand', 'kandar', '$2b$10$qpVaUjzAjGbhkiiX2xJDBOdj2t59j3ajfLXeWwMpuz1CRcGySydeu', NULL, 1, 'storage/user/pictures/mand.png', 'storage/user/pictures/thumb/mand_thumb.png', 2, '2023-11-03 17:41:58', '2023-11-03 17:41:58');
+INSERT INTO `master_users` VALUES (2, 'mand', 'mand@mail.com', 'mand', 'kandar', '$2b$10$qpVaUjzAjGbhkiiX2xJDBOdj2t59j3ajfLXeWwMpuz1CRcGySydeu', NULL, 1, 'storage/user/pictures/mand.png', 'storage/user/pictures/thumb/mand_thumb.png', 3, '2023-11-03 17:41:58', '2023-11-21 07:32:57');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -206,7 +210,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -237,13 +241,60 @@ CREATE TABLE `order`  (
   `customerId` int NULL DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `expired` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `createdAt` datetime(0) NOT NULL,
-  `updatedAt` datetime(0) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `cartId` int NULL DEFAULT NULL,
+  `customerId` int NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `expired` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for payments
+-- ----------------------------
+DROP TABLE IF EXISTS `payments`;
+CREATE TABLE `payments`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `transactionId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `merchantId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `paymentType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `transactionTime` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `transactionStatus` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `fraudStatus` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `bank` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `vaNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `expiry_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of payments
 -- ----------------------------
 
 -- ----------------------------
@@ -257,13 +308,13 @@ CREATE TABLE `personal_access_tokens`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `last_used_at` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `personal_access_tokens_token_unique`(`token`) USING BTREE,
-  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
+  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -278,10 +329,10 @@ CREATE TABLE `product_images`  (
   `imagePath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnailPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `productId` int NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_images
@@ -302,10 +353,10 @@ CREATE TABLE `role_accesses`  (
   `readz` tinyint(1) NOT NULL,
   `updatez` tinyint(1) NOT NULL,
   `deletez` tinyint(1) NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_accesses
@@ -314,6 +365,11 @@ INSERT INTO `role_accesses` VALUES (1, 1, 1, 1, '/user', '/user', 1, 1, 1, 1, '2
 INSERT INTO `role_accesses` VALUES (2, 1, 1, 2, '/role', '/role', 1, 1, 1, 1, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `role_accesses` VALUES (3, 1, 1, 3, '/menu', '/menu', 1, 1, 1, 1, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `role_accesses` VALUES (8, 2, 1, 1, '/user', '/user', 0, 0, 0, 0, '2023-11-15 14:40:20', '2023-11-15 14:40:20');
+INSERT INTO `role_accesses` VALUES (13, 3, 1, 3, '/menu', '/menu', 1, 1, 1, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_accesses` VALUES (14, 3, 1, 2, '/role', '/role', 1, 1, 1, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_accesses` VALUES (15, 3, 1, 1, '/user', '/user', 1, 1, 1, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_accesses` VALUES (16, 3, 2, 5, '/products', '/products', 1, 1, 1, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_accesses` VALUES (17, 3, 2, 4, '/categories', '/categories', 1, 1, 1, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
 
 -- ----------------------------
 -- Table structure for role_menus
@@ -323,16 +379,18 @@ CREATE TABLE `role_menus`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `roleId` int UNSIGNED NOT NULL,
   `menuId` int UNSIGNED NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_menus
 -- ----------------------------
 INSERT INTO `role_menus` VALUES (1, 1, 1, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `role_menus` VALUES (4, 2, 1, '2023-11-15 14:40:20', '2023-11-15 14:40:20');
+INSERT INTO `role_menus` VALUES (7, 3, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_menus` VALUES (8, 3, 2, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
 
 -- ----------------------------
 -- Table structure for role_submenus
@@ -343,10 +401,10 @@ CREATE TABLE `role_submenus`  (
   `roleId` int UNSIGNED NOT NULL,
   `roleMenuId` int UNSIGNED NOT NULL,
   `submenuId` int UNSIGNED NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_submenus
@@ -355,6 +413,11 @@ INSERT INTO `role_submenus` VALUES (1, 1, 1, 1, '2023-11-04 00:35:44', '2023-11-
 INSERT INTO `role_submenus` VALUES (2, 1, 1, 2, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `role_submenus` VALUES (3, 1, 1, 3, '2023-11-04 00:35:44', '2023-11-04 00:35:44');
 INSERT INTO `role_submenus` VALUES (8, 2, 4, 1, '2023-11-15 14:40:20', '2023-11-15 14:40:20');
+INSERT INTO `role_submenus` VALUES (13, 3, 7, 3, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_submenus` VALUES (14, 3, 7, 2, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_submenus` VALUES (15, 3, 7, 1, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_submenus` VALUES (16, 3, 8, 5, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
+INSERT INTO `role_submenus` VALUES (17, 3, 8, 4, '2023-11-21 09:32:57', '2023-11-21 09:32:57');
 
 -- ----------------------------
 -- Table structure for wishlists
@@ -364,10 +427,10 @@ CREATE TABLE `wishlists`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `productId` int UNSIGNED NOT NULL,
   `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
-  `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of wishlists
