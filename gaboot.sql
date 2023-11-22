@@ -11,7 +11,7 @@
  Target Server Version : 80035 (8.0.35)
  File Encoding         : 65001
 
- Date: 21/11/2023 21:40:13
+ Date: 22/11/2023 13:56:47
 */
 
 SET NAMES utf8mb4;
@@ -49,11 +49,13 @@ CREATE TABLE `categories`  (
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
+INSERT INTO `categories` VALUES (1, 'Graphic Card', 'Kumpulan Graphic Cardz', 'storage/category/pictures/Graphic_Card1700635356954.jpg', 'storage/category/pictures/thumb/Graphic_Card1700635356954_thumb.jpg', '2023-11-22 06:42:36', '2023-11-22 06:48:44');
+INSERT INTO `categories` VALUES (2, 'Processor', 'ya processor lah pake nanya', 'storage/category/pictures/Processor1700635804967.png', 'storage/category/pictures/thumb/Processor1700635804967_thumb.png', '2023-11-22 06:50:04', '2023-11-22 06:50:04');
 
 -- ----------------------------
 -- Table structure for master_customers
@@ -264,7 +266,7 @@ CREATE TABLE `orders`  (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -291,7 +293,7 @@ CREATE TABLE `payments`  (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payments
