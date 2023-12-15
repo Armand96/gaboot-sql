@@ -1,10 +1,9 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MySQL
+ Source Server         : MySQL - Local
  Source Server Type    : MySQL
- Source Server Version : 100414
- Source Server Version : 100428 (10.4.28-MariaDB)
+ Source Server Version : 80035 (8.0.35)
  Source Host           : localhost:3306
  Source Schema         : gaboot
 
@@ -12,7 +11,7 @@
  Target Server Version : 80035 (8.0.35)
  File Encoding         : 65001
 
- Date: 21/11/2023 21:40:13
+ Date: 15/12/2023 16:24:57
 */
 
 SET NAMES utf8mb4;
@@ -121,6 +120,7 @@ CREATE TABLE `master_products`  (
   `weight` double UNSIGNED NOT NULL,
   `weightUnit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `categoryId` int NOT NULL,
+  `totalSales` int NOT NULL DEFAULT 0,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
@@ -140,7 +140,7 @@ CREATE TABLE `master_roles`  (
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of master_roles
@@ -149,6 +149,7 @@ INSERT INTO `master_roles` VALUES (1, 'Admin', '2023-11-04 00:35:44', '2023-11-0
 INSERT INTO `master_roles` VALUES (2, 'Sub Admin', '2023-11-03 17:40:18', '2023-11-15 14:40:20');
 INSERT INTO `master_roles` VALUES (3, 'HRD', '2023-11-21 07:24:45', '2023-11-21 09:32:57');
 INSERT INTO `master_roles` VALUES (4, 'Karyawan', '2023-11-21 07:24:45', '2023-11-21 09:32:57');
+
 -- ----------------------------
 -- Table structure for master_submenus
 -- ----------------------------
@@ -232,18 +233,42 @@ INSERT INTO `migrations` VALUES (13, '2023_11_03_165629_create_wishlists_table',
 INSERT INTO `migrations` VALUES (14, '2023_11_05_103034_create_product_images_table', 2);
 
 -- ----------------------------
+-- Table structure for order_details
+-- ----------------------------
+DROP TABLE IF EXISTS `order_details`;
+CREATE TABLE `order_details`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `orderId` int NOT NULL,
+  `productId` int NOT NULL,
+  `price` double NOT NULL DEFAULT 0,
+  `priceCut` double NOT NULL DEFAULT 0,
+  `quantity` int NOT NULL DEFAULT 0,
+  `total` double NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_details
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `cartId` int NULL DEFAULT NULL,
   `customerId` int NULL DEFAULT NULL,
+  `totalPrice` double NULL DEFAULT NULL,
+  `priceCut` double NULL DEFAULT 0,
+  `grandTotal` double NULL DEFAULT 0,
+  `totalItem` int NULL DEFAULT 0,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `expired` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `createdAt` datetime(0) NOT NULL,
-  `updatedAt` datetime(0) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -257,9 +282,9 @@ CREATE TABLE `orders`  (
 DROP TABLE IF EXISTS `payments`;
 CREATE TABLE `payments`  (
   `id` int NOT NULL AUTO_INCREMENT,
-	`customerId` int NULL DEFAULT NULL,
+  `customerId` int NULL DEFAULT NULL,
   `transactionId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-	`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `merchantId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `paymentType` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -269,19 +294,16 @@ CREATE TABLE `payments`  (
   `bank` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `vaNumber` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `currency` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-	`signatureKey` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `signatureKey` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `expiry_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payments
 -- ----------------------------
-INSERT INTO `payments` VALUES (1, 'Beli VGA', '45f16250-2af1-4e3b-b074-3fd2a729ed0f', 'G097954025', 'bank_transfer', 'Beli VGA Nvidia', '2023-11-21 22:44:53', 'pending', 'accept', NULL, NULL, 'IDR', '2023-11-22 22:44:53', '2023-11-21 22:44:52', '2023-11-21 22:44:52');
-INSERT INTO `payments` VALUES (2, 'Beli VGA', '0796a753-c4ee-47ec-b657-68308098f9c7', 'G097954025', 'bank_transfer', 'Beli VGA Nvidia', '2023-11-21 23:47:06', 'pending', 'accept', 'bca', '54025679132', 'IDR', '2023-11-22 23:47:04', '2023-11-21 23:47:11', '2023-11-21 23:47:11');
-INSERT INTO `payments` VALUES (3, 'Beli VGA', 'e92fb188-2ed2-4596-97c7-c6e88363ec20', 'G097954025', 'bank_transfer', 'Beli VGA Nvidia', '2023-11-22 23:58:50', 'pending', 'accept', 'bca', '54025147286', 'IDR', '2023-11-23 23:58:50', '2023-11-22 23:58:51', '2023-11-22 23:58:51');
 
 -- ----------------------------
 -- Table structure for personal_access_tokens
@@ -294,12 +316,12 @@ CREATE TABLE `personal_access_tokens`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `last_used_at` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `personal_access_tokens_token_unique`(`token`) USING BTREE,
-  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) USING BTREE
+  UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
+  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -316,8 +338,8 @@ CREATE TABLE `product_images`  (
   `thumbnailPath` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `productId` int NOT NULL,
   `isCover` tinyint(1) NOT NULL DEFAULT 0,
-  `createdAt` timestamp(0) NULL DEFAULT NULL,
-  `updatedAt` timestamp(0) NULL DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
@@ -426,4 +448,3 @@ CREATE TABLE `wishlists`  (
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
-	
