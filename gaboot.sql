@@ -11,7 +11,7 @@
  Target Server Version : 100414
  File Encoding         : 65001
 
- Date: 16/12/2023 18:19:45
+ Date: 17/12/2023 21:16:36
 */
 
 SET NAMES utf8mb4;
@@ -246,9 +246,9 @@ CREATE TABLE `order_details`  (
   `orderId` int NOT NULL,
   `productId` int NOT NULL,
   `price` double NOT NULL DEFAULT 0,
-  `priceCut` double NOT NULL DEFAULT 0,
+  `discount` double NOT NULL DEFAULT 0,
   `quantity` int NOT NULL DEFAULT 0,
-  `total` double NOT NULL,
+  `total` double NOT NULL DEFAULT 0,
   `createdAt` datetime(0) NOT NULL DEFAULT current_timestamp(0),
   `updatedAt` datetime(0) NOT NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
@@ -267,7 +267,7 @@ CREATE TABLE `orders`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `customerId` int NULL DEFAULT NULL,
   `totalPrice` double NULL DEFAULT NULL,
-  `priceCut` double NULL DEFAULT 0,
+  `discount` double NULL DEFAULT 0,
   `grandTotal` double NULL DEFAULT 0,
   `totalItem` int NULL DEFAULT 0,
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
