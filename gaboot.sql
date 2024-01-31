@@ -134,7 +134,9 @@ CREATE TABLE `master_products`  (
 -- ----------------------------
 -- Records of master_products
 -- ----------------------------
-INSERT INTO `master_products` VALUES (3, 'RTX 3060', 'RTX 3060', 4000, 4, 'ajibb', 2, 'KG', 1, 0, 1, '2023-11-25 08:48:18', '2023-11-25 09:38:21');
+INSERT INTO `master_products` VALUES (1, 'RTX 3060 ASUS', 'RTX ASUS Dual', 5000000, 4, '240mm', 2, 'Kilogram', 1, 0, 1, '2023-11-25 08:48:18', '2023-11-25 09:38:21');
+INSERT INTO `master_products` VALUES (2, 'RTX 4090 MSI', 'Nvidia RTX 4090 MSI Gaming X Trio', 35000000, 12, '360mm', 5, 'Kilogram', 1, 0, 1, '2023-11-25 08:48:18', '2023-11-25 09:38:21');
+INSERT INTO `master_products` VALUES (3, 'RTX 4070 ASUS', 'Nvidia RTX 4070 ASUS ROG STRIX', 15000000, 5, '360mm', 5, 'Kilogram', 1, 0, 1, '2023-11-25 08:48:18', '2023-11-25 09:38:21');
 
 -- ----------------------------
 -- Table structure for master_roles
@@ -209,35 +211,6 @@ INSERT INTO `master_users` VALUES (1, 'admin', 'admin@example.com', 'admin', 'ad
 INSERT INTO `master_users` VALUES (2, 'mand', 'mand@mail.com', 'mand', 'kandar', '$2b$10$qpVaUjzAjGbhkiiX2xJDBOdj2t59j3ajfLXeWwMpuz1CRcGySydeu', NULL, 1, 'storage/user/pictures/mand.png', 'storage/user/pictures/thumb/mand_thumb.png', 3, '2023-11-03 17:41:58', '2023-11-21 07:32:57');
 
 -- ----------------------------
--- Table structure for migrations
--- ----------------------------
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE `migrations`  (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of migrations
--- ----------------------------
-INSERT INTO `migrations` VALUES (1, '2019_12_14_000001_create_personal_access_tokens_table', 1);
-INSERT INTO `migrations` VALUES (2, '2023_11_03_161057_create_master_users_table', 1);
-INSERT INTO `migrations` VALUES (3, '2023_11_03_162300_create_master_roles_table', 1);
-INSERT INTO `migrations` VALUES (4, '2023_11_03_162435_create_master_menus_table', 1);
-INSERT INTO `migrations` VALUES (5, '2023_11_03_162710_create_master_submenus_table', 1);
-INSERT INTO `migrations` VALUES (6, '2023_11_03_163732_create_master_customers_table', 1);
-INSERT INTO `migrations` VALUES (7, '2023_11_03_164305_create_master_products_table', 1);
-INSERT INTO `migrations` VALUES (8, '2023_11_03_164759_create_carts_table', 1);
-INSERT INTO `migrations` VALUES (9, '2023_11_03_164940_create_categories_table', 1);
-INSERT INTO `migrations` VALUES (10, '2023_11_03_165105_create_role_accesses_table', 1);
-INSERT INTO `migrations` VALUES (11, '2023_11_03_165315_create_role_menus_table', 1);
-INSERT INTO `migrations` VALUES (12, '2023_11_03_165517_create_role_submenus_table', 1);
-INSERT INTO `migrations` VALUES (13, '2023_11_03_165629_create_wishlists_table', 1);
-INSERT INTO `migrations` VALUES (14, '2023_11_05_103034_create_product_images_table', 2);
-
--- ----------------------------
 -- Table structure for order_details
 -- ----------------------------
 DROP TABLE IF EXISTS `order_details`;
@@ -309,29 +282,6 @@ CREATE TABLE `payments`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for personal_access_tokens
--- ----------------------------
-DROP TABLE IF EXISTS `personal_access_tokens`;
-CREATE TABLE `personal_access_tokens`  (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  `last_used_at` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `personal_access_tokens_token_unique`(`token`) USING BTREE,
-  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of personal_access_tokens
--- ----------------------------
-
--- ----------------------------
 -- Table structure for product_images
 -- ----------------------------
 DROP TABLE IF EXISTS `product_images`;
@@ -344,13 +294,14 @@ CREATE TABLE `product_images`  (
   `createdAt` timestamp(0) NULL DEFAULT NULL,
   `updatedAt` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_images
 -- ----------------------------
-INSERT INTO `product_images` VALUES (22, 'storage/product/pictures/RTX_3060_1701694263421.png', 'storage/product/pictures/thumb/RTX_3060_1701694263421_thumb.png', 3, 0, '2023-12-04 19:51:03', '2023-12-04 19:51:03');
-INSERT INTO `product_images` VALUES (23, 'storage/product/pictures/RTX_3060_1701694263426.png', 'storage/product/pictures/thumb/RTX_3060_1701694263426_thumb.png', 3, 0, '2023-12-04 19:51:03', '2023-12-04 19:51:03');
+INSERT INTO `product_images` VALUES (1, 'storage/product/pictures/RTX_3060_1701694263421.png', 'storage/product/pictures/thumb/RTX_3060_1701694263421_thumb.png', 1, 0, '2023-12-04 19:51:03', '2023-12-04 19:51:03');
+INSERT INTO `product_images` VALUES (2, 'storage/product/pictures/RTX_4090_1701694263426.png', 'storage/product/pictures/thumb/RTX_4090_1701694263426_thumb.png', 2, 0, '2023-12-04 19:51:03', '2023-12-04 19:51:03');
+INSERT INTO `product_images` VALUES (3, 'storage/product/pictures/RTX_4070_1701694263426.png', 'storage/product/pictures/thumb/RTX_4070_1701694263426_thumb.png', 3, 0, '2023-12-04 19:51:03', '2023-12-04 19:51:03');
 
 -- ----------------------------
 -- Table structure for role_accesses
