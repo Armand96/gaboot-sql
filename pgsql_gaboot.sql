@@ -209,7 +209,7 @@ CREATE TABLE payments (
 );
 
 -- Records of payments
-INSERT INTO payments (name, transaction_id, merchant_id, paymentType, description, transaction_time, transaction_status, fraud_status, bank, va_number, currency, expiry_time, created_at, updated_at) VALUES 
+INSERT INTO payments (name, transaction_id, merchant_id, payment_type, description, transaction_time, transaction_status, fraud_status, bank, va_number, currency, expiry_time, created_at, updated_at) VALUES 
 ('Beli RTX 4060', '21374f33-5321-4333-ad42-d688f95d2f9a', 'G097954025', 'bank_transfer', 'Beli RTX 4060 MSI', '2024-02-19 21:05:30', 'settlement', 'accept', 'bca', '54025294087', 'IDR', '2024-02-20 21:05:27', '2024-02-19 21:05:33', '2024-02-19 21:05:33');
 
 -- Table structure for product_images
