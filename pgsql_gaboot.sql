@@ -192,6 +192,8 @@ CREATE TABLE orders (
 DROP TABLE IF EXISTS payments;
 CREATE TABLE payments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  order_id uuid NOT NULL,
+  gross_amount DOUBLE PRECISION DEFAULT 0,
   name VARCHAR(255),
   transaction_id VARCHAR(255),
   merchant_id VARCHAR(255),
