@@ -308,3 +308,16 @@ CREATE TABLE wishlists (
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+-- Table structure for banners
+CREATE TABLE "public"."bannerse" (
+  "id" uuid NOT NULL DEFAULT gen_random_uuid(),
+  "name" varchar(100) COLLATE "pg_catalog"."default" NOT NULL,
+  "image_path" varchar(255) COLLATE "pg_catalog"."default",
+  "thumbnail_path" varchar(255) COLLATE "pg_catalog"."default",
+  "created_at" timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY ("id")
+)
+;
