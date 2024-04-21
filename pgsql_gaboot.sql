@@ -192,6 +192,8 @@ CREATE TABLE orders (
 DROP TABLE IF EXISTS payments;
 CREATE TABLE payments (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  order_id uuid NOT NULL,
+  gross_amount DOUBLE PRECISION DEFAULT 0,
   name VARCHAR(255),
   transaction_id VARCHAR(255),
   merchant_id VARCHAR(255),
@@ -209,8 +211,8 @@ CREATE TABLE payments (
 );
 
 -- Records of payments
-INSERT INTO payments (name, transaction_id, merchant_id, payment_type, description, transaction_time, transaction_status, fraud_status, bank, va_number, currency, expiry_time, created_at, updated_at) VALUES 
-('Beli RTX 4060', '21374f33-5321-4333-ad42-d688f95d2f9a', 'G097954025', 'bank_transfer', 'Beli RTX 4060 MSI', '2024-02-19 21:05:30', 'settlement', 'accept', 'bca', '54025294087', 'IDR', '2024-02-20 21:05:27', '2024-02-19 21:05:33', '2024-02-19 21:05:33');
+INSERT INTO payments (order_id, gross_amount, name, transaction_id, merchant_id, payment_type, description, transaction_time, transaction_status, fraud_status, bank, va_number, currency, expiry_time, created_at, updated_at) VALUES 
+('f1374f33-5321-4333-ad42-d688f95d2f9b', 5000000, 'Beli RTX 4060', '21374f33-5321-4333-ad42-d688f95d2f9a', 'G097954025', 'bank_transfer', 'Beli RTX 4060 MSI', '2024-02-19 21:05:30', 'settlement', 'accept', 'bca', '54025294087', 'IDR', '2024-02-20 21:05:27', '2024-02-19 21:05:33', '2024-02-19 21:05:33');
 
 -- Table structure for product_images
 DROP TABLE IF EXISTS product_images;
