@@ -311,7 +311,8 @@ CREATE TABLE wishlists (
 
 
 -- Table structure for banners
-CREATE TABLE "public"."bannerse" (
+DROP TABLE IF EXISTS banners;
+CREATE TABLE "public"."banners" (
   "id" uuid NOT NULL DEFAULT gen_random_uuid(),
   "name" varchar(100) COLLATE "pg_catalog"."default" NOT NULL,
   "image_path" varchar(255) COLLATE "pg_catalog"."default",
@@ -319,5 +320,4 @@ CREATE TABLE "public"."bannerse" (
   "created_at" timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updated_at" timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY ("id")
-)
-;
+);
