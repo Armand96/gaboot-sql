@@ -1,0 +1,49 @@
+name: Deploy to Server
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create directory
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          if [ ! -d '/var/www/cms.gbt.com' ]; then 
+            sudo mkdir -p /var/www/cms.gbt.com 
+          else 
+            echo Directory '/var/www/cms.gbt.com already exists.'
+          fi"
+      
+      - name: Deploy from repository
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          if [ ! -d '/var/www/cms.gbt.com/database' ]; then 
+            cd /var/www/cms.gbt.com && sudo git clone https://github.com/${{ github.repository }} database; 
+          else 
+            cd /var/www/cms.gbt.com/database && sudo git pull origin main; 
+          fi"
+
+      - name: Build and start Docker containers
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cms.gbt.com/database && sudo docker compose up --build -d"
+
+      - name: Copy SQL file to docker
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /home/${{ secrets.SERVER_USER }}/gbt-backend/Linux/ && sudo docker cp ./pgsql_gaboot.sql gaboot-shop-database:/docker-entrypoint-initdb.d/pgsql_gaboot.sql"
+      
+      - name: Build and start Docker containers
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "sudo docker exec -i gaboot-shop-database psql -U ${{ secrets.DB_USER }} -W ${{ secrets.DB_PASSWORD }} -f docker-entrypoint-initdb.d/pgsql_gaboot.sql"
