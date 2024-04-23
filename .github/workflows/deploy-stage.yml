@@ -45,5 +45,8 @@ jobs:
       - name: Copy SQL file to docker
         run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /home/${{ secrets.SERVER_USER }}/gbt-backend/Linux/ && sudo docker cp ./pgsql_gaboot.sql gaboot-shop-database:/docker-entrypoint-initdb.d/pgsql_gaboot.sql"
       
+      - name: Copy SQL file to docker
+        run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /home/${{ secrets.SERVER_USER }}/gbt-backend/Linux/ && sudo docker cp ./pg_hba.conf gaboot-shop-database://var/lib/postgresql/data/pg_hba.conf"
+      
       - name: Build and start Docker containers
         run: ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "sudo docker exec -i gaboot-shop-database psql -U ${{ secrets.DB_USER }} -W ${{ secrets.DB_PASSWORD }} -f docker-entrypoint-initdb.d/pgsql_gaboot.sql"
