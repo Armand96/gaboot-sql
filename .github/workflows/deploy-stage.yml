@@ -23,7 +23,7 @@ jobs:
 
       - name: Create directory
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
           if [ ! -d '/var/www/cms.gbt.com' ]; then 
             sudo mkdir -p /var/www/cms.gbt.com 
           else 
