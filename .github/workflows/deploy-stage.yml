@@ -36,7 +36,7 @@ jobs:
           if [ ! -d '/var/www/cms.gbt.com/database' ]; then 
             cd /var/www/cms.gbt.com && sudo git clone https://github.com/${{ github.repository }} database; 
           else 
-            cd /var/www/cms.gbt.com/database && sudo git pull origin main; 
+            cd /var/www/cms.gbt.com/database && sudo git pull origin master; 
           fi"
 
       - name: Build and start Docker containers
